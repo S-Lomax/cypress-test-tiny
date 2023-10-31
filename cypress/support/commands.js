@@ -22,4 +22,32 @@
 //
 //
 // -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import 'cypress-wait-until';
+import { BrowserMultiFormatReader } from '@zxing/browser';
+require('cypress-delete-downloads-folder').addCustomCommand();
+
+const chaiSorted = require('chai-sorted');
+chai.use(chaiSorted)
+
+const reader = new BrowserMultiFormatReader();
+
+Cypress.Commands.add('readCode', { prevSubject: true }, (subject) => {
+  const img = subject[0];
+  const image = new Image();
+  image.width = img.width;
+  image.height = img.height;
+  image.src = img.src;
+  image.crossOrigin = 'Anonymous';
+  return reader.decodeFromImageElement(image);
+});
+
+const decompress = require('decompress');
+const unzip = ({ path, file }) => decompress(path + file, path + 'unzip/' + file.replace('.zip', ''))
+
+module.exports = (on, config) => {
+    on('task', {
+        'unzipping': unzip,
+    })
+}

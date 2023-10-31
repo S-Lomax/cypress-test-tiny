@@ -15,9 +15,20 @@
   "author": "Cypress-io",
   "license": "ISC",
   "devDependencies": {
+    "cypress": "13.4"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/cypress-io/cypress-test-tiny.git"
+  },
+  "dependencies": {
+    "@zxing/browser": "^0.1.4",
+    "@zxing/library": "^0.20.0",
+    "adm-zip": "^0.5.10",
+    "chai-sorted": "^0.2.0",
+    "cypress-delete-downloads-folder": "^0.0.3",
+    "cypress-real-events": "^1.10.3",
+    "cypress-wait-until": "^2.0.1",
+    "decompress": "^4.2.1"
   }
 }
